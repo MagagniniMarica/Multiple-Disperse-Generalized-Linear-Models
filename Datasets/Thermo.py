@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 @author: Marica Magagnini
 """
@@ -12,8 +12,7 @@ from sklearn.impute import SimpleImputer
 import copy
 
 
-# This function returns a dict, for each feature is associated 
-# the type (categorical (also binary), integer or numerical (continuaos))
+
 def feature_type(dataset):
         features=list(dataset.columns)
         feat_type =[]
