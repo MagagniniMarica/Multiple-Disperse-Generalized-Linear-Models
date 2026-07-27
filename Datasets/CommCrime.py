@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 @author: Marica Magagnini
 """
@@ -11,8 +11,7 @@ from sklearn.impute import SimpleImputer
 import copy
 
 
-# This function returns a dict, for each feature is associated 
-# the type (categorical (also binary), integer or numerical (continuaos))
+
 def feature_type(dataset):
         features=list(dataset.columns)
         feat_type =[]
@@ -65,22 +64,22 @@ def data(path, task):
         missing_col = X.isnull().sum()
         print("Missing per colonna:\n", missing_col)
     
-        # 1. colonne con più di 50 missing → DROP
+        # 1. columns with more than 50 missing → DROP
         cols_to_drop = missing_col[missing_col > 50].index
-        print("\nColonne eliminate (>50 missing):\n", cols_to_drop)
+        print("\n Number deleted columns (>50 missing):\n", cols_to_drop)
     
         X = X.drop(columns=cols_to_drop)
     
-        # 2. colonne con missing ≤ 50 → IMPUTAZIONE
+        # 2. columns with missing ≤ 50 → Imputation
         cols_to_impute = missing_col[(missing_col > 0) & (missing_col <= 50)].index
-        print("\nColonne da imputare:\n", cols_to_impute)
+        print("\n  Number imputed columns:\n", cols_to_impute)
     
         if len(cols_to_impute) > 0:
             num_imputer = SimpleImputer(strategy='mean')
             X[cols_to_impute] = num_imputer.fit_transform(X[cols_to_impute])
     
-        # debug finale
-        print("\nMissing dopo trattamento:\n", X.isnull().sum())
+        # debug 
+        print("\nMissing after preprocessing:\n", X.isnull().sum())
         
      
     X = X[target.notnull()].reset_index(drop=True)
