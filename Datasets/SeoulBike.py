@@ -11,8 +11,7 @@ from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
 
-# This function returns a dict, for each feature is associated 
-# the type (categorical (also binary), integer or numerical (continuaos))
+
 def feature_type(dataset):
         features=list(dataset.columns)
         feat_type =[]
@@ -39,7 +38,7 @@ class Encoder_(BaseEstimator, TransformerMixin):
                 self.encoders[col] = ('label', le)
             else:
                 # OneHotEncoder per multicategoria
-                ohe = OneHotEncoder(sparse_output=False)  # drop='first' evita multicollinearità
+                ohe = OneHotEncoder(sparse_output=False) 
                 ohe.fit(X[[col]])
                 self.encoders[col] = ('onehot', ohe)
         return self
@@ -74,7 +73,6 @@ def data(path, task):
     
     
     # Categorical Variables
-    # Applica l'encoder automatico
     encoder = Encoder_()
     bs2 = encoder.fit_transform(bs1[bs1_cat_f])
     for f in bs2.columns:
@@ -87,16 +85,11 @@ def data(path, task):
     features_type=feature_type(bs3)   # type of each feature vector (Dict)
     
     
-    # Split into training and test sets
-    # bs3_train, bs3_test, target_train, target_test = train_test_split(bs3, target, test_size=0.2, random_state=42)
-
-    
+   
     #Normalization
     min_max_scaler = preprocessing.MinMaxScaler()
     BikeSeoul_scaled =pd.DataFrame( min_max_scaler.fit_transform(bs3),  columns= features)
-    # BikeSeoul_test_scaled =pd.DataFrame( min_max_scaler.fit_transform(bs3_test),  columns= features)
-    
     
 
     return BikeSeoul_scaled, target, features, features_type
-    # return BikeSeoul_train_scaled, BikeSeoul_test_scaled, target_train, target_test, features, features_type
+    
