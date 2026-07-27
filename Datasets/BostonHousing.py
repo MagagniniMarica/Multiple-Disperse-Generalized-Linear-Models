@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jan  3 14:37:47 2024
 
-@author: Marica
+"""
+@author: Marica Magagnini
 
 Boston Dataset loading and preprocessing
 """
@@ -12,7 +10,6 @@ from sklearn import preprocessing
 # from sklearn.model_selection import train_test_split
 
 # This function returns a dict, for each feature is associated 
-# the type (categorical (also binary), integer or numerical (continuaos))
 def feature_type(dataset):
         features=list(dataset.columns)
         feat_type =[]
@@ -74,10 +71,7 @@ def data(path, task):
 
     
     
-    # # Split into training and test sets
-    # boston_train, boston_test, target_train, target_test = train_test_split(boston, target, test_size=0.2, random_state=42)
-
-    
+     
     #Normalization
     min_max_scaler = preprocessing.MinMaxScaler()
     boston_scaled =pd.DataFrame( min_max_scaler.fit_transform(boston),  columns= features)
@@ -86,5 +80,4 @@ def data(path, task):
     
     
     return boston_scaled, target, features, features_type
-    # return boston_train_scaled, boston_test_scaled, target_train, target_test, features, features_type
-    
+   
