@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu Jun 12 14:57:01 2025
-
 @author: Marica
 
 Seoul Bike rent per hour
-path = 'C:/Users/Maric/Dropbox/Dataset/SeoulBike/'
-Poission REgression dataset
+Poission Regression dataset
 """
 
 import pandas as pd
